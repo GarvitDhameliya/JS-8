@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      //   class parent {
+      //     add() {
+      //       console.log("parent called");
+      //     }
+      //   }
+
+      //   class child extends parent {
+      //     add() {
+      //       console.log("child called");
+      //     }
+      //   }
+      //   class grandchild extends child {
+      //     add() {
+      //       console.log("grand child called");
+      //     }
+      //   }
+
+      //   let p1 = new parent();
+      //   p1.add();
+
+      //   let g1 = new grandchild();
+      //   g1.add();
+
+      //   let c1 = new child();
+      //   c1.add();
+
+      function Data(namee, emaill) {
+        let name = namee;
+        let email = emaill;
+        let id = 12;
+
+        let printData = function () {
+          console.log(
+            "your id is =" +
+              id +
+              " " +
+              "your name is =" +
+              name +
+              " " +
+              "your email = " +
+              email
+          );
+        };
+
+        this.result = function () {
+          [];
+          printData();
+        };
+      }
+
+      let d1 = new Data("garvit", "garvit@gmail.com");
+
+      let d2 = new Data("ram", "garvit@gmail.com");
+
+      d1.result();
+      d2.result();
+    </script>
+  </body>
+</html>
