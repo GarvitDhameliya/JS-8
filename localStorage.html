@@ -6,14 +6,62 @@
     <title>Document</title>
   </head>
   <body>
+    <input type="text" id="fname" name="fname" />
+    <input type="text" id="lname" name="lname" />
+    <button onclick="save()">Save</button>
+
     <script>
-      console.log(localStorage);
+      // console.log(localStorage);
 
-      let arr = [1, 2, 3, 4];
+      // let arr = [1, 2, 3, 4];
 
-      //   localStorage.setItem("name", JSON.stringify(arr));
+      // //   localStorage.setItem("name", JSON.stringify(arr));
 
-      console.log(localStorage.clear());
+      // console.log(localStorage.clear());
+
+      // console.log(localStorage);
+
+      // let arr = [];
+
+      // arr.push("garvit");
+
+      // arr.push("ram");
+
+      // localStorage.setItem("data", JSON.stringify(arr));
+
+      // const result = JSON.parse(localStorage.getItem("data"));
+
+      // // console.log(result[0]);
+
+      // localStorage.removeItem("data");
+
+      // console.log(localStorage);
+      // let arr = [];
+      function save() {
+        const dataResult = JSON.parse(localStorage.getItem("data"));
+
+        console.log(dataResult);
+
+        // localStorage.setItem("data", JSON.stringify(arr));
+        console.log(localStorage);
+        // localStorage.clear();
+
+        let fname = document.getElementById("fname").value;
+        let lname = document.getElementById("lname").value;
+
+        const data = {
+          firstname: fname,
+          lastname: lname,
+        };
+
+        // // console.log(data);
+
+        dataResult.push(data);
+
+        localStorage.setItem("data", JSON.stringify(dataResult));
+        // console.log(localStorage);
+        // console.log(dataResult);
+      }
     </script>
   </body>
 </html>
