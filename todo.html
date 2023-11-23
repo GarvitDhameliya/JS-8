@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <input type="text" id="task" />
+    <button onclick="save()">Add</button>
+
+    <ul></ul>
+
+    <script>
+      //   console.log(task);
+      let task = document.getElementById("task");
+      let ul = document.querySelector("ul");
+      const list = localStorage.getItem("tasks")
+        ? JSON.parse(localStorage.getItem("tasks"))
+        : [];
+
+      const save = () => {
+        list.push(task.value);
+        localStorage.setItem("tasks", JSON.stringify(list));
+        console.log(localStorage);
+        // localStorage.clear();
+        addTask(task.value);
+        // input.value = "";
+      };
+
+      list.forEach(addTask);
+      function addTask(text) {
+        const li = document.createElement("li");
+        li.textContent = text;
+        ul.appendChild(li);
+      }
+    </script>
+  </body>
+</html>

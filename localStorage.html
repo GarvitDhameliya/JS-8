@@ -11,56 +11,57 @@
     <button onclick="save()">Save</button>
 
     <script>
-      // console.log(localStorage);
-
-      // let arr = [1, 2, 3, 4];
-
-      // //   localStorage.setItem("name", JSON.stringify(arr));
-
-      // console.log(localStorage.clear());
-
-      // console.log(localStorage);
-
-      // let arr = [];
-
-      // arr.push("garvit");
-
-      // arr.push("ram");
-
-      // localStorage.setItem("data", JSON.stringify(arr));
-
-      // const result = JSON.parse(localStorage.getItem("data"));
-
-      // // console.log(result[0]);
-
-      // localStorage.removeItem("data");
-
-      // console.log(localStorage);
-      // let arr = [];
       function save() {
-        const dataResult = JSON.parse(localStorage.getItem("data"));
+        // const dataResult = JSON.parse(localStorage.getItem("data"));
+        // console.log(dataResult);
+        // // localStorage.setItem("data", JSON.stringify(arr));
+        // console.log(localStorage);
+        // // localStorage.clear();
 
-        console.log(dataResult);
+        // const data = {
+        //   firstname: fname,
+        //   lastname: lname,
+        // };
+        // // // console.log(data);
+        // dataResult.push(data);
+        // localStorage.setItem("data", JSON.stringify(dataResult));
+        // console.log(localStorage);
+        // console.log(dataResult);
 
-        // localStorage.setItem("data", JSON.stringify(arr));
-        console.log(localStorage);
-        // localStorage.clear();
+        // console.log(localStorage);
+
+        // const data = JSON.parse(localStorage.getItem("data"));
+
+        // console.log(data, "data");
+
+        // data?.map((val, ind) => {
+        //   console.log(val.firstname);
+        //   document.write(val.firstname);
+        // });
+
+        let arr = [];
+
+        const result = JSON.parse(localStorage.getItem("data"));
 
         let fname = document.getElementById("fname").value;
         let lname = document.getElementById("lname").value;
 
         const data = {
-          firstname: fname,
-          lastname: lname,
+          fname,
+          lname,
         };
 
-        // // console.log(data);
+        console.log(data);
 
-        dataResult.push(data);
+        result.push(data);
 
-        localStorage.setItem("data", JSON.stringify(dataResult));
-        // console.log(localStorage);
-        // console.log(dataResult);
+        localStorage.setItem("data", JSON.stringify(result));
+
+        console.log(localStorage, "local");
+
+        console.log(result, "result");
+
+        console.log(arr, "arr");
       }
     </script>
   </body>
