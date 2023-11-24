@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LocalStorage Example</title>
+    <style>
+      .center {
+        align-items: center;
+      }
+
+      .container {
+        display: flex;
+        max-width: 1290px;
+        margin: auto;
+        justify-content: center;
+      }
+
+      .table {
+        margin-left: 100px;
+      }
+
+      table {
+        width: 400px;
+        border-collapse: collapse;
+        /* margin-top: 50px; */
+      }
+
+      th,
+      td {
+        border: 2px solid #b3b1b1;
+        padding: 8px;
+        text-align: left;
+      }
+
+      th {
+        background-color: #f2f2f2;
+      }
+
+      tr:nth-child(even) {
+        background-color: #f2f2f2;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="form">
+        <label for="fname">First Name:</label>
+        <input type="text" id="fname" /><br /><br />
+        <label for="lname">Last Name:</label>
+        <input type="text" id="lname" /><br /><br />
+        <div style="display: flex; justify-content: center">
+          <button onclick="save()">Save</button>
+          <button onclick="cl()" style="margin: 0 5px">Clear</button>
+        </div>
+      </div>
+
+      <div class="table">
+        <table id="data-table">
+          <thead>
+            <tr>
+              <th>Id</th>
+              <th>First Name</th>
+              <th>Last Name</th>
+              <th>Delete</th>
+            </tr>
+          </thead>
+          <tbody id="table-body"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <script>
+      let data = JSON.parse(localStorage.getItem("data")) || [];
+
+      function save() {
+        let fname = document.getElementById("fname").value;
+        let lname = document.getElementById("lname").value;
+
+        const m_data = {
+          firstName: fname,
+          lastName: lname,
+        };
+
+        data.push(m_data);
+
+        document.getElementById("fname").value = "";
+        document.getElementById("lname").value = "";
+
+        if (fname == "" || lname == "") {
+          alert("Plz fill both field");
+        } else {
+          localStorage.setItem("data", JSON.stringify(data));
+          update();
+        }
+      }
+      function cl() {
+        localStorage.removeItem("data");
+        location.reload();
+      }
+      function update() {
+        const tableBody = document.getElementById("table-body");
+        tableBody.innerHTML = "";
+
+        data.map((m_data, ind) => {
+          const row = document.createElement("tr");
+          row.innerHTML = `
+                    <td>${ind}</td>
+                    <td>${m_data.firstName}</td>
+                    <td>${m_data.lastName}</td>
+                    <td><Button onclick="deleteName(${ind})">Delete</button></td>
+                        <td><Button onclick="">view</button></td>
+                `;
+          tableBody.appendChild(row);
+        });
+      }
+      update();
+
+      const deleteName = (index) => {
+        console.log(index);
+
+        data.splice(index, 1);
+
+        localStorage.setItem("data", JSON.stringify(data));
+
+        console.log(localStorage);
+
+        // console.log(data, "data");
+
+        // const result = data[index];
+        // console.log(result);
+        location.reload();
+      };
+    </script>
+  </body>
+</html>
