@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  </head>
+  <body>
+    <table id="data-table">
+      <thead></thead>
+      <tbody id="table-body"></tbody>
+    </table>
+    <script>
+      $.ajax({
+        url: "https://dog.ceo/api/breeds/image/random",
+        method: "GET",
+        success: (res) => {
+          console.log(res.message);
+        },
+        error: (err) => {
+          console.log(err);
+        },
+      });
+    </script>
+  </body>
+</html>
