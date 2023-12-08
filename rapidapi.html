@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      let input = "gadasdasdada";
+
+      fetch(
+        `https://weather338.p.rapidapi.com/locations/search?query=${input}&language=en-US`,
+        {
+          method: "GET",
+          headers: {
+            "X-RapidAPI-Key":
+              "064a7e74c4msh114121731b8b9c6p170f58jsn40f32c5e5c3c",
+            "X-RapidAPI-Host": "weather338.p.rapidapi.com",
+          },
+        }
+      ).then((res) => {
+        // console.log(res.json());
+        res.json().then((result) => {
+          console.log(result);
+        });
+      });
+    </script>
+  </body>
+</html>
