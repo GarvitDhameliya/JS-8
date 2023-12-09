@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <input type="text" name="fname" id="fname" />
+    <input type="text" name="lname" id="lname" />
+    <button onclick="add()">add</button>
+    <br />
+
+    <input type="hidden" name="index" id="index" />
+    <input type="text" name="fname" id="firstname" />
+    <input type="text" name="lname" id="lastname" />
+    <button onclick="update()">update</button>
+    <button onclick="">cancel</button>
+
+    <table class="table">
+      <thead id="data-table">
+        <tr>
+          <th>id</th>
+          <th>fname</th>
+          <th>lname</th>
+        </tr>
+      </thead>
+      <tbody id="table-body"></tbody>
+    </table>
+
+    <script>
+      const result = JSON.parse(localStorage.getItem("data"));
+      console.log(result);
+
+      function add() {
+        const fname = document.getElementById("fname").value;
+        const lname = document.getElementById("lname").value;
+
+        const data = {
+          fname,
+          lname,
+        };
+
+        console.log(data);
+        result.push(data);
+        console.log(result);
+        localStorage.setItem("data", JSON.stringify(result));
+        console.log(localStorage);
+      }
+
+      function getData() {
+        const tableBody = document.getElementById("table-body");
+        tableBody.innerHTML = "";
+
+        result.map((m_data, ind) => {
+          const row = document.createElement("tr");
+          row.innerHTML = `
+                    <td>${ind}</td>
+                    <td>${m_data.fname}</td>
+                    <td>${m_data.lname}</td>
+                    <td><Button onclick="deleteName(${ind})">Delete</button></td>
+                        <td><Button onclick="edit(${ind})">update</button></td>
+                `;
+          tableBody.appendChild(row);
+        });
+      }
+      getData();
+
+      function edit(index) {
+        const data = result[index];
+        const hidden = (document.getElementById("index").value = index);
+        const firstname = (document.getElementById("firstname").value =
+          data.fname);
+        const lastname = (document.getElementById("lastname").value =
+          data.lname);
+
+        console.log(hidden);
+
+        console.log(data);
+      }
+
+      function update() {
+        const firstname = document.getElementById("firstname").value;
+        const lastname = document.getElementById("lastname").value;
+        const index = parseInt(document.getElementById("index").value);
+
+        const updateData = {
+          fname: firstname,
+          lname: lastname,
+        };
+
+        console.log(index, "final");
+
+        console.log(updateData);
+
+        result[index] = updateData;
+        localStorage.setItem("data", JSON.stringify(result));
+        location.reload();
+      }
+    </script>
+  </body>
+</html>
