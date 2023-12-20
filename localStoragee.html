@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <button onclick="save()">save</button>
+    <button onclick="deleteData()">delete</button>
+    <script>
+      const finalData = JSON.parse(localStorage.getItem("data")) || [];
+      const data = [];
+
+      //   localStorage.setItem("data", JSON.stringify(data));
+      //   console.log(localStorage);
+
+      const save = () => {
+        console.log("called");
+
+        const res = {
+          name: "hello",
+          email: "hello@gmail.com",
+        };
+
+        finalData.push(res);
+        localStorage.setItem("data", JSON.stringify(finalData));
+      };
+
+      const deleteData = () => {
+        const name = "hello";
+
+        const arr = finalData.filter((val) => val.name !== name);
+        console.log(arr);
+        // const arr = finalData.splice(index, 1);
+        localStorage.setItem("data", JSON.stringify(arr));
+      };
+    </script>
+  </body>
+</html>

@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Home</title>
+    <link rel="stylesheet" href="./css/index.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+      integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+      integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+      integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
+    <section>
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">Navbar</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="#"
+                >Home <span class="sr-only">(current)</span></a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="./pages/product.html">Product</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </section>
+
+    <section class="wrapper">
+      <i class="fa-solid fa-arrow-left button" id="prev"></i>
+      <div class="image-container">
+        <div class="carousel">
+          <img src="images/img1.jpg" alt="" />
+          <img src="images/img2.jpg" alt="" />
+          <img src="images/img3.jpg" alt="" />
+          <img src="images/img4.jpg" alt="" />
+        </div>
+        <i class="fa-solid fa-arrow-right button" id="next"></i>
+      </div>
+    </section>
+
+    <script>
+      // Get the DOM elements for the image carousel
+      const wrapper = document.querySelector(".wrapper"),
+        carousel = document.querySelector(".carousel"),
+        images = document.querySelectorAll("img"),
+        buttons = document.querySelectorAll(".button");
+
+      console.log(images);
+      console.log(buttons);
+
+      let imageIndex = 1,
+        intervalId;
+
+      // Define function to start automatic image slider
+      const autoSlide = () => {
+        // Start the slideshow by calling slideImage() every 2 seconds
+        intervalId = setInterval(() => slideImage(++imageIndex), 2000);
+      };
+      // Call autoSlide function on page load
+      autoSlide();
+
+      // A function that updates the carousel display to show the specified image
+      const slideImage = () => {
+        // Calculate the updated image index
+        imageIndex =
+          imageIndex === images.length
+            ? 0
+            : imageIndex < 0
+            ? images.length - 1
+            : imageIndex;
+        // Update the carousel display to show the specified image
+        carousel.style.transform = `translate(-${imageIndex * 100}%)`;
+      };
+
+      // A function that updates the carousel display to show the next or previous image
+      const updateClick = (e) => {
+        console.log(e.target.id);
+        // Stop the automatic slideshow
+        clearInterval(intervalId);
+        // Calculate the updated image index based on the button clicked
+        imageIndex += e.target.id === "next" ? 1 : -1;
+        slideImage(imageIndex);
+        // Restart the automatic slideshow
+        autoSlide();
+      };
+
+      // Add event listeners to the navigation buttons
+      buttons.forEach((button) =>
+        button.addEventListener("click", updateClick)
+      );
+
+      // Add mouseover event listener to wrapper element to stop auto sliding
+      wrapper.addEventListener("mouseover", () => clearInterval(intervalId));
+      // Add mouseleave event listener to wrapper element to start auto sliding again
+      wrapper.addEventListener("mouseleave", autoSlide);
+    </script>
+  </body>
+</html>
